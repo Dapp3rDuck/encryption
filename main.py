@@ -1,15 +1,7 @@
 
 # Encryption
 def run(input):
-    output = []
-    for x in range(len(input)): output.append(ord(input[x])*key)
-    return output
-
-# Decryption
-def solve(input):
-    return ''.join([
-        chr(int(input[i])/int(key)) for i in range(len(input))
-    ])
+    return [ord(input[i]) * key for i in range(len(input))]
 
 def encrypt(fname):
     f = open(fname, 'r')
