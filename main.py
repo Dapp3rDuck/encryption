@@ -1,47 +1,36 @@
-#Python Encryption Experiment
 
-key = 1
+# Encryption
+def run(input):
+    output = []
+    for x in range(len(input)): output.append(ord(input[x])*key)
+    return output
 
-def encrypt(filename):
-    def run(input):
-        output = []
-        for x in range (len(input)):
-            output.append(ord(input[x])*key)
-        return(output)
-    f = open(filename, 'r')
-    list = run(f.read())
+# Decryption
+def solve(input):
+    return ''.join([
+        chr(int(input[i])/int(key)) for i in range(len(input))
+    ])
+
+def encrypt(fname):
+    f = open(fname, 'r')
+    output = run(f.read())
     f.close()
-    with open(filename, 'w') as b:
-        for listitem in list:
-            b.write('%s\n' % listitem)
+    with open(fname, 'w') as b:
+        for l in output: b.write('%s\n' % l)
 
-def decrypt(filename):
-    def decrypt(input):
-        output = ''
-        for x in range (len(input)):
-            output = output + chr( int( int(input[x])/(key) ) )
-        return(output)
-    encrypted = []
-    with open(filename, 'r') as b:
-        for line in b:
-            currentPlace = line[:-1]
-            encrypted.append(currentPlace)
+def decrypt(fname):
+    with open(fname, 'r') as b:
+        encrypted = [l[:-1] for l in b]     
     f = open(filename, 'w')
-    f.write(decrypt(encrypted))
+    f.write(''.join([
+        chr(int(input[i])/int(key)) for i in range(len(encrypted))
+    ]))
     f.close()
 
-print()
-if int(input('Would you like to encrypt(1) or decrypt(2)?: ')) == 1:
-    path = str(input('File Path:? '))    
-    key = int(input('Encryption Key?: '))
-    encrypt(path)
-    print()
-    print('Done')
-    print()
-else:
-    path = str(input('File Path:? '))    
-    key = int(input('Encryption Key?: '))
-    decrypt(path)
-    print()
-    print('Done')
-    print()
+path = str(input('File Path (relative): '))
+key = int(input('Encryption Key (integer): '))
+
+if int(input('\nEncrypt (1) or decrypt (2)?: ')) == 1: encrypt(path)
+else: decrypt(path)
+
+print('\nDone\n')
