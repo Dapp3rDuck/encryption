@@ -13,9 +13,9 @@ def encrypt(fname):
 def decrypt(fname):
     with open(fname, 'r') as b:
         encrypted = [l[:-1] for l in b]     
-    f = open(filename, 'w')
+    f = open(fname, 'w')
     f.write(''.join([
-        chr(int(input[i])/int(key)) for i in range(len(encrypted))
+        chr(int(int(encrypted[i])/key)) for i in range(len(encrypted))
     ]))
     f.close()
 
