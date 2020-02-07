@@ -19,10 +19,11 @@ def decrypt(fname):
     ]))
     f.close()
 
+action = int(input('Encrypt (1) or decrypt (2)?: '))
 path = str(input('File Path (relative): '))
 key = int(input('Encryption Key (integer): '))
 
-if int(input('\nEncrypt (1) or decrypt (2)?: ')) == 1: encrypt(path)
+if action == 1: encrypt(path)
 else: decrypt(path)
 
 print('\nDone\n')
